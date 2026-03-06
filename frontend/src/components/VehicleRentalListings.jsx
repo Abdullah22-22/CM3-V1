@@ -1,23 +1,22 @@
 import { useEffect } from "react";
-import VehicleRentalListing from "./VehicleRentalListing";
 import useCars from "../hooks/UseCar";
-
+import VehicleRentalListing from "./VehicleRentalListing";
 
 const VehicleRentalListings = () => {
-  const { cars, fetchCars, loading, error } = useCars();
-
+  const { cars, fetchCars, removeCar } = useCars();
 
   useEffect(() => {
     fetchCars();
   }, [fetchCars]);
 
-  if (loading) return <p>Loading cars...</p>;
-  if (error) return <p>{error}</p>;
-
   return (
     <div className="rental-list">
       {cars.map((car) => (
-        <VehicleRentalListing key={car._id} car={car} />
+        <VehicleRentalListing 
+          key={car._id || car.id} 
+          car={car} 
+          onDelete={removeCar} 
+        />
       ))}
     </div>
   );
