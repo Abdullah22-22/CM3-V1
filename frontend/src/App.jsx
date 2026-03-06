@@ -1,24 +1,37 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import JobListPage from "./pages/JobListPage";
-import AddJobPage from "./pages/AddJobPage";
+import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements, Outlet } from "react-router-dom";
+
+// Pages & Components
+import HomePage from "./pages/HomePage";
+import AddVehicleRentalPage from "./pages/AddVehicleRentalPage";
+import EditVehicleRentalPage from "./pages/EditVehicleRentalPage";
+import VehicleRentalPage from "./pages/VehicleRentalPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import Navbar from "./components/Navbar";
+
+const Layout = () => (
+  <>
+    <Navbar />
+    <div className="content">
+      <Outlet />
+    </div>
+  </>
+);
+
+// Router configuration
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<HomePage />} />
+      <Route path="add-rental" element={<AddVehicleRentalPage />} />
+      <Route path="rental/:id" element={<VehicleRentalPage />} />
+      <Route path="edit-rental/:id" element={<EditVehicleRentalPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Route>
+  )
+);
 
 const App = () => {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<JobListPage />} />
-            <Route path="/add-job" element={<AddJobPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

@@ -1,32 +1,41 @@
-import jobsData from "../data/job.data.json";
-import { useState, useEffect } from "react";
-import { getJobs } from "../api/jobApi";
+import { useEffect, useState } from "react";
+import { getVehicleRentals } from "../api/vehicleRentalApi";
+import { Link } from "react-router-dom";
 
-const JobListPage = () => {
-  const [jobs, setJobs] = useState([]);
+const HomePage = () => {
+  const [rentals, setRentals] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      const data = await getJobs();
-      if (data.length === 0) setJobs(jobsData); // fallback
-      else setJobs(data);
-    }
-    fetchData();
+    const fetchRentals = async () => {
+      const data = await getVehicleRentals();
+      setRentals(data);
+    };
+    fetchRentals();
   }, []);
 
   return (
-    <div className="job-list">
-      <h1>Job List</h1>
-      {jobs.map(job => (
-        <div key={job.id} className="job-card">
-          <h2>{job.title}</h2>
-          <p>Company: {job.company.name}</p>
-          <p>City: {job.location.city}</p>
-          <p>Salary: {job.salary}</p>
+    <div className="rental-list">
+      {rentals.map((rental, index) => (
+        <div className="rental-preview" key={index}>
+          <h2>{rental.vehicleModel}</h2>
+          <p>{rental.description}</p>
+          <p>
+            <strong>Agency:</strong> {rental.agency.name} ({rental.agency.contactEmail})
+          </p>
+          <p>
+            <strong>Location:</strong> {rental.location.city}, {rental.location.state}
+          </p>
+          <p>
+            <strong>Price:</strong> ${rental.dailyPrice} / day
+          </p>
+          <p>
+            <strong>Status:</strong> {rental.availabilityStatus}
+          </p>
+          <Link to={`/rental/${rental.id}`}>View Details</Link>
         </div>
       ))}
     </div>
   );
 };
 
-export default JobListPage;
+export default HomePage;
