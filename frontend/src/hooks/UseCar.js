@@ -37,26 +37,6 @@ export default function useCars() {
       const result = data?.car ?? data?.vehicleRental ?? data ?? null;
       setCar(result);
       return result;
-abdul@DESKTOP-K63TUJV MINGW64 ~/Desktop/CM3-V1 (hooks)
-$ git switch main
-Switched to branch 'main'
-Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
-  (use "git pull" to update your local branch)
-
-abdul@DESKTOP-K63TUJV MINGW64 ~/Desktop/CM3-V1 (main)
-$ git switch hooks
-Switched to branch 'hooks'
-
-abdul@DESKTOP-K63TUJV MINGW64 ~/Desktop/CM3-V1 (hooks)
-$ git pull origin main
-From https://github.com/Abdullah22-22/CM3-V1
- * branch            main       -> FETCH_HEAD
-CONFLICT (modify/delete): frontend/src/hooks/UseCar.js deleted in b7be7ddc84223bbfa3e9e74eb364004ea4706bd3 and modified in HEAD.  Version HEAD of frontend/src/hooks/UseCar.js left in tree.
-Automatic merge failed; fix conflicts and then commit the result.
-
-abdul@DESKTOP-K63TUJV MINGW64 ~/Desktop/CM3-V1 (hooks|MERGING)
-$
-
     } catch (e) {
       setError(e?.response?.data?.message || "Failed to fetch car");
       throw e;
