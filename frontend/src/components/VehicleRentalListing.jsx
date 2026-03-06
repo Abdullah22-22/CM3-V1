@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
 const VehicleRentalListing = ({ car, onDelete }) => {
-  
+
   const handleDelete = async (e) => {
-    e.preventDefault(); 
-    e.stopPropagation(); 
-    
+    e.preventDefault();
+    e.stopPropagation();
+
     try {
-      await onDelete(car._id || car.id); 
+      await onDelete(car._id || car.id);
     } catch (err) {
       console.error("Delete failed:", err);
     }
@@ -25,17 +25,19 @@ const VehicleRentalListing = ({ car, onDelete }) => {
         <p>Agency Email: {car.agency?.contactEmail}</p>
         <p>Location: {car.location?.city}, {car.location?.state}</p>
         <p>Insurance: {car.insurancePolicy}</p>
-        
-        <button 
-          onClick={handleDelete} 
-          style={{ 
-            marginTop: '10px', 
-            backgroundColor: '#ff4d4d', 
-            color: 'white', 
-            border: 'none', 
-            padding: '8px 16px', 
+
+
+
+        <button
+          onClick={handleDelete}
+          style={{
+            marginTop: '10px',
+            backgroundColor: '#ff4d4d',
+            color: 'white',
+            border: 'none',
+            padding: '8px 16px',
             borderRadius: '4px',
-            cursor: 'pointer' 
+            cursor: 'pointer'
           }}
         >
           Delete
