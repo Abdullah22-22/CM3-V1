@@ -8,7 +8,42 @@ const getAllVehicleRentals = async (req, res) => {
 
 // POST /api/vehicleRentals
 const createVehicleRental = async (req, res) => {
-  res.send("createVehicleRental");
+  try {
+
+    const {
+      vehicleModel,
+      category,
+      description,
+      agency,
+      location,
+      dailyPrice,
+      bookingDeadline,
+      insurancePolicy
+    } = req.body;
+
+    const job = await  VehicleRental.create({
+      vehicleModel,
+      category,
+      description,
+      agency,
+      location,
+      dailyPrice,
+      bookingDeadline,
+      insurancePolicy
+    });
+
+    return res.status(201).json({
+      ok: true,
+      data: job
+    })
+
+  } catch (err) {
+    return res.satus(400).json({
+      ok: false,
+      message: "somting went wrong",
+      error: err.message
+    })
+  }
 };
 
 // GET /api/vehicleRentals/:vehicleRentalId
