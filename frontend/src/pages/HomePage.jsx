@@ -1,3 +1,4 @@
+
 import VehicleRentalListings from "../components/VehicleRentalListings";
 
 const Home = () => {

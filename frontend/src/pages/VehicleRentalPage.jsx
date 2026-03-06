@@ -1,49 +1,31 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const VehicleRentalPage = () => {
+  const { id } = useParams();
+  const [rental, setRental] = useState(null);
 
-	const { id } = useParams();
+  useEffect(() => {
+    const fetchRental = async () => {
+      const data = await getVehicleRentals();
+      const found = data.find(r => r.id.toString() === id);
+      setRental(found);
+    };
+    fetchRental();
+  }, [id]);
 
-	const [ loading, setLoading ] 	= useState(true);
-	const [ rental,  setRental 	] 	= useState(null);
-	const [ error, 	 setError 	] 	= useState(null);
-
-	useEffect(() => {
-		const fetchVehicle = async () => {
-			try {
-				const res = await fetch(`/api/vehicleRentals/${id}`);
-				console.log("ID:", id);
-				if(!res.ok){
-					throw new Error("Network response not ok");
-				}
-				const data = await res.json();
-				setRental(data);
-			} catch(e) {
-				setError(e.message);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchVehicle();
-	}, [id]);
+  if (!rental) return <p>Loading...</p>;
 
   return (
     <div className="rental-preview">
-	  {loading ? (
-		<p>Loading...</p>
-	  ) : error ? (
-		<p>{error}</p>
-	  ) : (
-	<>
-      <h2>Vehicle Rental Details</h2>
-	  <h2>{vehicle.model}</h2>
-	  <h2></h2>
-	  <h2></h2>
-	  <h2></h2>
-	  <h2></h2>
-	</>
-  	)}
+      <h2>{rental.vehicleModel}</h2>
+      <p>{rental.description}</p>
+      <p><strong>Agency:</strong> {rental.agency.name} ({rental.agency.contactEmail})</p>
+      <p><strong>Location:</strong> {rental.location.city}, {rental.location.state}</p>
+      <p><strong>Price:</strong> ${rental.dailyPrice} / day</p>
+      <p><strong>Status:</strong> {rental.availabilityStatus}</p>
+      <p><strong>Insurance:</strong> {rental.insurancePolicy}</p>
+      <p><strong>Booking Deadline:</strong> {rental.bookingDeadline}</p>
     </div>
   );
 };
