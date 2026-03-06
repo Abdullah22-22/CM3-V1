@@ -28,3 +28,4 @@ export async function deleteCar(id) {
   const res = await axios.delete(`${baseUrl}/api/vehicleRentals/${id}`);
   return res.data;
 }
+
