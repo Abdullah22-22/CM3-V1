@@ -54,14 +54,14 @@ const createVehicleRental = async (req, res) => {
 // GET /api/vehicleRentals/:vehicleRentalId
 const getVehicleRentalById = async (req, res) => {
 
-	const { vehicle_id } = req.params;
+	const { vehicleRentalId } = req.params;
 
-  	if (!mongoose.Types.ObjectId.isValid(vehicle_id)) {
+  	if (!mongoose.Types.ObjectId.isValid(vehicleRentalId)) {
     	return res.status(400).json({ message: "Invalid vehicle ID" });
   }
 
   	try {
-    	const vehicle = await Job.findById(vehicle_id);
+    	const vehicle = await VehicleRental.findById(vehicleRentalId);
     	if (vehicle) {
     	  res.status(200).json(vehicle);
     	} else {
@@ -81,7 +81,7 @@ const updateVehicleRental = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(vehicleRentalId)) {
       return res.status(404).json({ error: "Vehicle rental not found" });
     }
-    const vehicleRental = await VehicleRental.findOneAndUpdate({ _id: vehicleRentalId },...req.body, { new: true });
+    const vehicleRental = await VehicleRental.findOneAndUpdate({ _id: vehicleRentalId },req.body, { new: true });
     if (!vehicleRental) {
       return res.status(404).json({ error: "Vehicle rental not found" });
     }
