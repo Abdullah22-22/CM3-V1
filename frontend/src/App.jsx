@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/HomePage";
 import AddVehicleRentalPage from "./pages/AddVehicleRentalPage";
 import Navbar from "./components/Navbar";
+import VehicleRentalPage from "./pages/VehicleRentalPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/:id" element={<VehicleRentalPage />} />
             <Route path="/add-rental" element={<AddVehicleRentalPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

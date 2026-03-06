@@ -28,3 +28,9 @@ export async function deleteJob(id) {
   const res = await axios.delete(`${baseUrl}/api/vehicleRentals/${id}`);
   return res.data;
 }
+
+export async function getVehicleRentalById(id) {
+  const res = await axios.get(`${baseUrl}/api/vehicleRentals/${id}`);
+  return res.data;
+}
+
