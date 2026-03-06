@@ -21,7 +21,7 @@ const createVehicleRental = async (req, res) => {
       insurancePolicy
     } = req.body;
 
-    const job = await  VehicleRental.create({
+    const cars = await  VehicleRental.create({
       vehicleModel,
       category,
       description,
