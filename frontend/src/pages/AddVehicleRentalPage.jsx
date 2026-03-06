@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { addVehicleRental } from "../api/vehicleRentalApi";
+import useCars from "../hooks/UseCar";
 
 const AddVehicleRentalPage = () => {
+  const { addCar, loading, error } = useCars();
   const [vehicleModel, setVehicleModel] = useState("");
   const [category, setCategory] = useState("Economy");
   const [description, setDescription] = useState("");
@@ -23,25 +24,42 @@ const AddVehicleRentalPage = () => {
       vehicleModel,
       category,
       description,
-      agency: { name: agencyName, contactEmail: agencyEmail, fleetSize: parseInt(fleetSize) },
-      location: { city, state },
+      agency: {
+        name: agencyName,
+        contactEmail: agencyEmail,
+        fleetSize: parseInt(fleetSize, 10),
+      },
+      location: {
+        city,
+        state,
+      },
       dailyPrice: parseFloat(dailyPrice),
       availabilityStatus,
       bookingDeadline,
       insurancePolicy,
     };
 
-    const res = await addVehicleRental(rentalData);
-    if (res.success) {
-      setMessage("Vehicle rental added successfully!");
-      setVehicleModel(""); setCategory("Economy"); setDescription("");
-      setAgencyName(""); setAgencyEmail(""); setFleetSize("");
-      setCity(""); setState(""); setDailyPrice("");
-      setAvailabilityStatus("available"); setBookingDeadline("");
+    try {
+      await addCar(rentalData);
+      setMessage("Vehicle rental added successfully");
+
+      setVehicleModel("");
+      setCategory("Economy");
+      setDescription("");
+      setAgencyName("");
+      setAgencyEmail("");
+      setFleetSize("");
+      setCity("");
+      setState("");
+      setDailyPrice("");
+      setAvailabilityStatus("available");
+      setBookingDeadline("");
       setInsurancePolicy("");
-    } else {
-      setMessage("API unavailable, please try later.");
+
+    } catch (err) {
+ setMessage("Failed to add vehicle rental");
     }
+
   };
 
   return (
@@ -94,9 +112,10 @@ const AddVehicleRentalPage = () => {
         <label>Insurance Policy:</label>
         <input type="text" value={insurancePolicy} onChange={e => setInsurancePolicy(e.target.value)} required />
 
-        <button type="submit">Add Vehicle Rental</button>
+        <button disabled={loading} type="submit">Add Vehicle Rental</button>
       </form>
       {message && <p>{message}</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 };
