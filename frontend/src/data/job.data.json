@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "Frontend Developer",
+    "type": "Full-time",
+    "description": "Develop and maintain modern React applications.",
+    "company": {
+      "name": "TechNova",
+      "contactEmail": "hr@technova.com",
+      "size": 120
+    },
+    "location": {
+      "city": "Helsinki",
+      "state": "Uusimaa"
+    },
+    "salary": 45000,
+    "experienceLevel": "Mid",
+    "status": "open",
+    "applicationDeadline": "2026-04-15",
+    "requirements": [
+      "React",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ]
+  },
+  {
+     "id": 2,
+    "title": "Backend Node.js Engineer",
+    "type": "Full-time",
+    "description": "Build scalable REST APIs using Node.js and MongoDB.",
+    "company": {
+      "name": "FinData Solutions",
+      "contactEmail": "jobs@findata.io",
+      "size": 75
+    },
+    "location": {
+      "city": "Espoo",
+      "state": "Uusimaa"
+    },
+    "salary": 52000,
+    "experienceLevel": "Senior",
+    "status": "open",
+    "applicationDeadline": "2026-04-30",
+    "requirements": [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "REST API"
+    ]
+  },
+  {
+     "id": 3,
+    "title": "Junior Software Developer",
+    "type": "Contract",
+    "description": "Assist in developing web applications and fixing bugs.",
+    "company": {
+      "name": "Nordic Dev Studio",
+      "contactEmail": "careers@nordicdev.fi",
+      "size": 30
+    },
+    "location": {
+      "city": "Vantaa",
+      "state": "Uusimaa"
+    },
+    "salary": 32000,
+    "experienceLevel": "Entry",
+    "status": "open",
+    "applicationDeadline": "2026-05-10",
+    "requirements": [
+      "JavaScript",
+      "Git",
+      "Basic React",
+      "Problem Solving"
+    ]
+  }
+]
