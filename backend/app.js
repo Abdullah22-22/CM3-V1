@@ -5,8 +5,16 @@ const { unknownEndpoint, errorHandler, requestLogger } = require('./middleware/c
 
 const app = express();
 
+
+const allowedOrigins = [
+    "http://localhost:5173",
+];
+
+
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: allowedOrigins
+}));
 app.use(express.json());
 app.use(requestLogger);
 
