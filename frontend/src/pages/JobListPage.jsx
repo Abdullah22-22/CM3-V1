@@ -1,32 +1,31 @@
-import jobsData from "../data/job.data.json";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getJobs } from "../api/jobApi";
+import jobsData from "../data/job.data.json";
 
-const JobListPage = () => {
+export default function JobListPage() {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const data = await getJobs();
-      if (data.length === 0) setJobs(jobsData); // fallback
+      if (data.length === 0) setJobs(jobsData);
       else setJobs(data);
     }
     fetchData();
   }, []);
 
   return (
-    <div className="job-list">
+    <div>
       <h1>Job List</h1>
       {jobs.map(job => (
-        <div key={job.id} className="job-card">
+        <div key={job.id} style={{border: "1px solid #ccc", padding: "10px", margin: "10px 0"}}>
           <h2>{job.title}</h2>
           <p>Company: {job.company.name}</p>
-          <p>City: {job.location.city}</p>
+          <p>City: {job.location.city}, {job.location.state}</p>
           <p>Salary: {job.salary}</p>
+          <p>Experience: {job.experienceLevel}</p>
         </div>
       ))}
     </div>
   );
-};
-
-export default JobListPage;
+}

@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// pages & components
-import Home from "./pages/HomePage";
-import AddVehicleRentalPage from "./pages/AddVehicleRentalPage";
 import Navbar from "./components/Navbar";
+import JobListPage from "./pages/JobListPage";
+import AddJobPage from "./pages/AddJobPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
@@ -13,8 +11,8 @@ const App = () => {
         <Navbar />
         <div className="content">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/add-rental" element={<AddVehicleRentalPage />} />
+            <Route path="/" element={<JobListPage />} />
+            <Route path="/add-job" element={<AddJobPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
