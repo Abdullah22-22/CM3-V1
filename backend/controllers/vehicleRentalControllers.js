@@ -34,7 +34,7 @@ const createVehicleRental = async (req, res) => {
 
     return res.status(201).json({
       ok: true,
-      data: job
+      data: cars
     })
 
   } catch (err) {
